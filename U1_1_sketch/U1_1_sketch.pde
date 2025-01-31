@@ -32,16 +32,22 @@ void draw() {
   rect(250, 300, 300, 300);
   fill(#A7A75B);
   triangle(250, 300, 550, 300, 400, 150);
+
   //windows
   fill(#CCF1FA);
   square(437.5, 400, 75);
   line(437.5, 437.5, 512.5, 437.5);
-  
+  line(475, 400, 475, 475);
   square(287.5, 400, 75);
   line(287.5, 437.5, 362.5, 437.5);
+  line(325, 400, 325, 475);
+
   //door
   fill(#EDEDDA);
   rect(365, 490, 70, 110);
+  fill(#DEDDBE);
+  circle(375, 540, 10);
+
   //sun
   fill(#F2D56C);
   circle(100, 50, 70);
