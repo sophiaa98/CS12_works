@@ -7,17 +7,18 @@ final int B = 2;
 final int C = 3;
 
 color gray = #D6D6D6;
-color white = #FFFFFF;
+color gwhite = #F0F0F0;
 color dgray = #9B9999;
 
 void setup() {
-  size(800, 600);
+  size(800, 800);
   mode = A;
 }
 
+
 void draw() {
-  background(white);
-  shapes(0, 0);
+  background(gwhite);
+  shapes(0, -75);
 
   if (mode == B) {
     b();
@@ -26,24 +27,58 @@ void draw() {
   } else {
     println("Mode error: " + mode);
   }
+  
+    //button
+  if(dist(mouseX, mouseY, 50, 400) < 37.5) {
+    fill(gwhite);
+    stroke(dgray);
+    circle(50, 400, 75);
+    fill(#646464);
+    textSize(50);
+    text("<", 35, 415);
+  }
+  else{
+    fill(255);
+    stroke(0);
+    circle(50, 400, 75);
+    fill(0);
+    textSize(50);
+    text("<", 35, 415);
+  }
+  if(dist(mouseX, mouseY, 750, 400) < 37.5) {
+    fill(gwhite);
+    stroke(dgray);
+    circle(750, 400, 75);
+    fill(#646464);
+    textSize(50);
+    text(">", 740, 415);
+  }
+  else{
+    fill(255);
+    stroke(0);
+    circle(750, 400, 75);
+    fill(0);
+    textSize(50);
+    text(">", 740, 415);
+  }
 }
 
 
 void shapes(int x, int y) {
   
-  while(y <= 600) {
-    x = 0 - (y/75) * 75;
+  while(y <= 800) {
+    x = 0 - (y/75) * 150;
     while(x <= 850) {
       parta(x, y);
       partb(x, y);
       x += 300;
     }
-    y += 100;
+    y += 75;
   }
 }
 
 //void shapes(int x, int y) {
-//  while(y <= 600) {
+//  while(y <= 800) {
 //    x = 0 - (y/75) * 75;
 //    while(x <= 850) {
 //      parta(x, y);
@@ -75,41 +110,22 @@ void partb(int x, int y) {
 }
 
 
-void mousePressed() {
+//void mousePressed() {
+//  if(dist(mouseX, mouseY, 750, 400) < 37.5) {
+//    mode = B;
+//  }
   
-}
+//  if(dist(mouseX, mouseY, 50, 400) < 37.5) {
+//    mode = C;
+//  }
+//}
 
-void gameClicks() {
-  if(dist(mouseX, mouseY, 100, 100) < 50) {
+
+void aClicks() {
+  if(dist(mouseX, mouseY, 50, 400) < 37.5) {
+    mode = C;
+  }
+  else if(dist(mouseX, mouseY, 750, 400) < 37.5) {
     mode = B;
   }
 }
-
-//void draw() {
-//  if(mousePressed){
-//    line(width/2, height/2, mouseX, mouseY);
-//  }
-  
-//  if (dist(x, y, mouseX, mouseY) <200) { //circle button
-    
-//  }
-  
-//  rect(100, 100, 200, 100);
-//  if(mouseX > 100 && mouseX < 300 && mouseY > 100 && mouseY < 200){  //rectangular button
-//    stroke(0);
-//  } 
-//  else{
-//    stroke(255);
-//  }
-    
-//}
-
-//void mousePressed() {
-//  if (mouseX > 100 && mouseX < 300 && mouseY > 100 && mouseY < 200) {
-//    bkg = bround;
-//  }
-//}
-
-//void mouseReleased() {
-//  line(width/2, height/2, mouseX, mouseY);
-//}
