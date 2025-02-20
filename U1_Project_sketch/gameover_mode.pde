@@ -1,5 +1,6 @@
 void c() {
   background(#C43B3B);
+  image(img2, 250, 250, 200, 200);
 
 }
 

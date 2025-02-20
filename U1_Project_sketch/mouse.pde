@@ -1,5 +1,5 @@
 void mouseReleased() {
-  if(mode == A) {
+  if (mode == A) {
     aClicks();
   } else if (mode == B) {
     bClicks();
