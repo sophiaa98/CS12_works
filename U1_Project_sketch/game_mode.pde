@@ -1,5 +1,11 @@
+String nOfcol;
+//String sgreen;
+//String sblue;
+//color cred;
+//color cgreen;
+color col;
+
 void b() {
-  life = 1;
   score = 0;
   background(255);
   image(img1, -25, 0, 550, 500);
@@ -8,23 +14,88 @@ void b() {
   //rect(250, 0, 250, 500);
   
   //game mode
-  textSize(50);
-
-  fill(colors[randomColor]);
-  text(words[randomWord], width/2, height/2);
   
-  if (dist(mouseX, mouseY, 375, 400) < 37.5) {
+
+  
+  while (life != 0) {
+    textSize(50);
+    //50-50 split
+    if (random == 1){
+      col = colors[randomColor];
+      nOfcol = words[randomWord];
+    }
+    if (random == 2){
+      col = colors[randomColor];
+      if (nOfcol.equals("red")) {
+        col = red;
+      }
+      else if (nOfcol.equals("blue")) {
+        col = blue;
+      }
+      else if (nOfcol.equals("green")) {
+        col = green;
+      }
+    }
+  
+    while (nOfcolSize >= 0){
+      textSize(nOfcolSize);
+      fill(col);
+      text(nOfcol, width/2, height/2);
+      nOfcolSize --;
+    }
+    
+  }
+
+
+
+  
+  if (dist(mouseX, mouseY, 375, 400) < 37.5 || rightkey == true) {
     button(375, 400, #BCD0E0, 255);
   }
   else {
     button(375, 400, #F2F9FF, 255);
   }
   
-  if (dist(mouseX, mouseY, 125, 400) < 37.5) {
+  if (dist(mouseX, mouseY, 125, 400) < 37.5 || leftkey == true) {
     button(125, 400, #BCD0E0, 255);
   }
   else {
     button(125, 400, #F2F9FF, 255);
+  }
+  
+  //match press
+  if (pressMATCH == true) {
+    if (nOfcol.equals("red") && col == red){
+      score ++;
+      pressMATCH = false;
+    }
+    else if (nOfcol.equals("blue") && col == blue){
+      score ++;
+      pressMATCH = false;
+    }
+    else if (nOfcol.equals("green") && col == green){
+      score ++;
+      pressMATCH = false;
+    }
+    else {
+      life = 0;
+    }
+  }
+  //don't match press
+  if (pressDONTMATCH == true) {
+    if (nOfcol.equals("red") && col == red){
+      life = 0;
+    }
+    if (nOfcol.equals("blue") && col == blue){
+      life = 0;
+    }
+    if (nOfcol.equals("green") && col == green){
+      life = 0;
+    }
+    else {
+      score ++;
+      pressDONTMATCH = false;
+    }
   }
   
   fill(0);  
@@ -40,10 +111,10 @@ void b() {
 }
 
   void bClicks() {
-  //if(dist(mouseX, mouseY, 50, 400) < 37.5) {
-  //  mode = A;
-  //}
-  //else if(dist(mouseX, mouseY, 750, 400) < 37.5) {
-  //  mode = C;
-  //}
+  if(dist(mouseX, mouseY, 125, 400) < 37.5 || leftkey == true) {
+    pressMATCH = true;
+  }
+  else if(dist(mouseX, mouseY, 375, 400) < 37.5 || rightkey == true) {
+    pressDONTMATCH = true;
+  }
 }

@@ -1,6 +1,9 @@
 void c() {
   background(#C43B3B);
   image(img2, 250, 250, 200, 200);
+  text("HIGHEST SCORE", width/2, height/2);
+  //"HIGHEST SCORE"
+  //"SCORE"
 
 }
 

@@ -6,9 +6,6 @@ final int A = 1;
 final int B = 2;
 final int C = 3;
 
-int randomWord = (int) random(0, 3);
-int randomColor = (int) random(0,3);
-
 color red = #D34026;
 color green = #60C140;
 color blue = #3E94CB;
@@ -16,9 +13,19 @@ color blue = #3E94CB;
 int score;
 int life;
 float size = 40;
+int HighestScore;
+//if (HighestScore < score) {
+//  HighestScore = score;
+//}
+
+int nOfcolSize;
 
 String[] words = {"RED", "GREEN", "BLUE"};
 color[] colors = {red, green, blue};
+
+int random = (int) random (1, 2);
+int randomWord = (int) random(0, 3);
+int randomColor = (int) random(0, 3);
 
 PImage img1;
 PImage img2;
@@ -26,6 +33,11 @@ PImage img2;
 PImage[] gif;
 int numberOfFrames;
 int f;
+
+boolean leftkey, rightkey;
+boolean pressMATCH;
+boolean pressDONTMATCH;
+
 
 void setup() {
   size(500, 500);
@@ -44,6 +56,8 @@ void setup() {
   
   img1 = loadImage("241aa887698947.Y3JvcCw4MDgsNjMyLDAsMA.png");
   img2 = loadImage("Screenshot 2025-02-20 095801.png");
+  
+  leftkey = rightkey = false;
 }
 
 void draw() {
