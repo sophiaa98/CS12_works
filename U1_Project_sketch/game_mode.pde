@@ -4,8 +4,13 @@ String nOfcol;
 //color cred;
 //color cgreen;
 color col;
+int nOfcolSize = 50;
+int timeLimit = 1;   
+int timeCounter = nOfcolSize;  
+
 
 void b() {
+  BGM.play();
   score = 0;
   background(255);
   image(img1, -25, 0, 550, 500);
@@ -17,33 +22,33 @@ void b() {
   
 
   
-  while (life != 0) {
-    textSize(50);
+  while (timeCounter >= timeLimit) {
+    timeCounter = 0;  
+    nOfcolSize = 50;  
+    
     //50-50 split
-    if (random == 1){
-      col = colors[randomColor];
-      nOfcol = words[randomWord];
-    }
-    if (random == 2){
-      col = colors[randomColor];
-      if (nOfcol.equals("red")) {
-        col = red;
-      }
-      else if (nOfcol.equals("blue")) {
-        col = blue;
-      }
-      else if (nOfcol.equals("green")) {
-        col = green;
-      }
+    //if (random == 1){
+    //  col = colors[randomColor];
+    //  nOfcol = words[randomWord];
+    //}
+    col = colors[randomColor];
+    nOfcol = words[randomWord];
+    if (random == 2) {
+      if (nOfcol.equals("RED")) col = red;
+      else if (nOfcol.equals("BLUE")) col = blue;
+      else if (nOfcol.equals("GREEN")) col = green;
     }
   
-    while (nOfcolSize >= 0){
+    while (nOfcolSize >= 1){
       textSize(nOfcolSize);
       fill(col);
       text(nOfcol, width/2, height/2);
       nOfcolSize --;
     }
-    
+    //if (life == 0){
+    //  break;
+    //}
+    nOfcolSize ++;
   }
 
 
@@ -63,39 +68,27 @@ void b() {
     button(125, 400, #F2F9FF, 255);
   }
   
-  //match press
-  if (pressMATCH == true) {
-    if (nOfcol.equals("red") && col == red){
-      score ++;
-      pressMATCH = false;
-    }
-    else if (nOfcol.equals("blue") && col == blue){
-      score ++;
-      pressMATCH = false;
-    }
-    else if (nOfcol.equals("green") && col == green){
-      score ++;
-      pressMATCH = false;
-    }
+  
+  // Match press
+  if (pressMATCH) {
+    if ((nOfcol.equals("RED") && col == red) || (nOfcol.equals("BLUE") && col == blue) || (nOfcol.equals("GREEN") && col == green)) {
+      score++;
+    } 
     else {
-      life = 0;
+      life--;
     }
+    pressMATCH = false;
   }
-  //don't match press
-  if (pressDONTMATCH == true) {
-    if (nOfcol.equals("red") && col == red){
-      life = 0;
-    }
-    if (nOfcol.equals("blue") && col == blue){
-      life = 0;
-    }
-    if (nOfcol.equals("green") && col == green){
-      life = 0;
-    }
+  
+  // Don't match press
+  if (pressDONTMATCH) {
+    if ((nOfcol.equals("RED") && col == red) || (nOfcol.equals("BLUE") && col == blue) || (nOfcol.equals("GREEN") && col == green)) {
+      life--;
+    } 
     else {
-      score ++;
-      pressDONTMATCH = false;
+      score++;
     }
+    pressDONTMATCH = false;
   }
   
   fill(0);  
@@ -108,9 +101,12 @@ void b() {
   if (life == 0) {
     mode = C;
   }
+  
+  textSize(50);
+  text("SCORE: " + score, width/2, 100);
 }
 
-  void bClicks() {
+void bClicks() {
   if(dist(mouseX, mouseY, 125, 400) < 37.5 || leftkey == true) {
     pressMATCH = true;
   }

@@ -1,7 +1,13 @@
 void c() {
   background(#C43B3B);
-  image(img2, 250, 250, 200, 200);
-  text("HIGHEST SCORE", width/2, height/2);
+  if (HighestScore < score) {
+    HighestScore = score;
+  }
+  image(img2, 0, 0, 500, 500);
+  fill(red);
+  text("GAME OVER", width/2, 50);
+  text("SCORE: " + score, width/2, 230);
+  text("HIGHEST SCORE: " + HighestScore, width/2, 300);
   //"HIGHEST SCORE"
   //"SCORE"
 

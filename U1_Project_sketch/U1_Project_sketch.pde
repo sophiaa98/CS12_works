@@ -1,6 +1,16 @@
 //Sophia Song
 //Feb 12 2025
 
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+AudioPlayer BGM, EBGM;
+
 int mode;
 final int A = 1;
 final int B = 2;
@@ -14,11 +24,6 @@ int score;
 int life;
 float size = 40;
 int HighestScore;
-//if (HighestScore < score) {
-//  HighestScore = score;
-//}
-
-int nOfcolSize;
 
 String[] words = {"RED", "GREEN", "BLUE"};
 color[] colors = {red, green, blue};
@@ -44,6 +49,10 @@ void setup() {
   mode = A;
   textSize(100);
   textAlign(CENTER, CENTER);
+  
+  minim = new Minim(this);
+  BGM = minim.loadFile("BGM.mp3");
+  EBGM = minim.loadFile("video-game-over.mp3");
   
   numberOfFrames = 40; 
   gif = new PImage[numberOfFrames];

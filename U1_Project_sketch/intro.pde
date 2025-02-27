@@ -1,4 +1,5 @@
 void a() {
+  BGM.play();
   pressMATCH = false;
   pressDONTMATCH = false;
   life = 1;
@@ -33,5 +34,6 @@ void show() {
 void aClicks() {
   if (dist(mouseX, mouseY, 410, 400) < 37.5) {
     mode = B;
+    BGM.pause();
   }
 }
