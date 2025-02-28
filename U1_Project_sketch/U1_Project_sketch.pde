@@ -49,24 +49,28 @@ void setup() {
   mode = A;
   textSize(100);
   textAlign(CENTER, CENTER);
-  
+
   minim = new Minim(this);
   BGM = minim.loadFile("BGM.mp3");
   EBGM = minim.loadFile("video-game-over.mp3");
-  
-  numberOfFrames = 40; 
+  //scoreA = minim.loadFile("");
+
+  numberOfFrames = 40;
   gif = new PImage[numberOfFrames];
-  
+
   int i = 0;
   while (i < numberOfFrames) {
     gif[i] = loadImage("frame_" + i + "_delay-0.04s.gif");
     i++;
   }
-  
+
   img1 = loadImage("241aa887698947.Y3JvcCw4MDgsNjMyLDAsMA.png");
   img2 = loadImage("Screenshot 2025-02-20 095801.png");
-  
+
   leftkey = rightkey = false;
+
+  col = colors[randomColor];
+  nOfcol = words[randomWord];
 }
 
 void draw() {
@@ -79,10 +83,9 @@ void draw() {
   } else {
     println("Mode error: " + mode);
   }
-
 }
 
-void button(int x, int y, color c, color cs){
+void button(int x, int y, color c, color cs) {
   fill(c);
   stroke(cs);
   circle(x, y, 75);

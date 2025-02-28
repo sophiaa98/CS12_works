@@ -1,4 +1,5 @@
 void c() {
+  EBGM.play();
   background(#C43B3B);
   if (HighestScore < score) {
     HighestScore = score;
