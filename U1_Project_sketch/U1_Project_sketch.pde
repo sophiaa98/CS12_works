@@ -9,7 +9,7 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 Minim minim;
-AudioPlayer BGM, EBGM;
+AudioPlayer BGM, EBGM, TRUE, FALSE;
 
 int mode;
 final int A = 1;
@@ -53,6 +53,8 @@ void setup() {
   minim = new Minim(this);
   BGM = minim.loadFile("BGM.mp3");
   EBGM = minim.loadFile("video-game-over.mp3");
+  TRUE = minim.loadFile("FAILURE.wav");
+  FALSE = minim.loadFile("SUCCESS.wav");
   //scoreA = minim.loadFile("");
 
   numberOfFrames = 40;

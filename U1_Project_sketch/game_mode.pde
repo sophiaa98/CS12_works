@@ -4,14 +4,18 @@ String nOfcol;
 //color cred;
 //color cgreen;
 color col;
-int nOfcolSize = 50;
-int timeLimit = 100;
+int nOfcolSize = 60;
+int timeLimit = 1;
 int timeCounter = nOfcolSize;
 
+//int random = (int) random (1, 2);
+//int randomWord = (int) random(0, 3);
+//int randomColor = (int) random(0, 3);
+//String[] words = {"RED", "GREEN", "BLUE"};
+//color[] colors = {red, green, blue};
 
 void b() {
   BGM.play();
-  score = 0;
   background(255);
   image(img1, -25, 0, 550, 500);
 
@@ -24,7 +28,13 @@ void b() {
 
   if (timeCounter >= timeLimit) {
     timeCounter = 0;
-    nOfcolSize = 50;
+    nOfcolSize = 60;
+    randomWord = (int) random(0, 3);
+    randomColor = (int) random(0, 3);
+    random = (int) random (1, 3);
+    
+    col = colors[randomColor];
+    nOfcol = words[randomWord];
 
     //50-50 split
     //if (random == 1){
@@ -44,14 +54,13 @@ void b() {
     textSize(nOfcolSize);
     fill(col);
     text(nOfcol, width/2, height/2);
-    nOfcolSize -= 0.2;
+    nOfcolSize -= 0.005;
   } 
-  else {
-    nOfcolSize = 50;
+  if (nOfcolSize < 1) {
+    nOfcolSize = 60;
     timeCounter = nOfcolSize;
-    timeLimit = 100;
-    col = colors[randomColor];
-    nOfcol = words[randomWord];
+    timeLimit = 1;
+    //col = (int) random(0, 3);
   }
 
   //if (life == 0){
@@ -80,6 +89,7 @@ void b() {
   if (pressMATCH) {
     if ((nOfcol.equals("RED") && col == red) || (nOfcol.equals("BLUE") && col == blue) || (nOfcol.equals("GREEN") && col == green)) {
       score++;
+      TRUE.play();
     } else {
       life--;
     }
@@ -92,6 +102,7 @@ void b() {
       life--;
     } else {
       score++;
+      TRUE.play();
     }
     pressDONTMATCH = false;
   }
@@ -104,7 +115,6 @@ void b() {
   text("MATCH", 125, 396);
 
   if (life == 0) {
-
     mode = C;
     BGM.pause();
   }
