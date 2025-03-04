@@ -74,6 +74,7 @@ void b() {
 
   if (dist(mouseX, mouseY, 375, 400) < 37.5 || rightkey == true) {
     button(375, 400, #BCD0E0, 255);
+    println(leftkey);
   } else {
     button(375, 400, #F2F9FF, 255);
   }
@@ -89,11 +90,13 @@ void b() {
   if (pressMATCH) {
     if ((nOfcol.equals("RED") && col == red) || (nOfcol.equals("BLUE") && col == blue) || (nOfcol.equals("GREEN") && col == green)) {
       score++;
+      TRUE.rewind();
       TRUE.play();
     } else {
       life--;
     }
     pressMATCH = false;
+    leftkey = false;
   }
 
   // Don't match press
@@ -102,9 +105,11 @@ void b() {
       life--;
     } else {
       score++;
+      TRUE.rewind();
       TRUE.play();
     }
     pressDONTMATCH = false;
+    rightkey = false;
   }
 
   fill(0);
@@ -117,16 +122,24 @@ void b() {
   if (life == 0) {
     mode = C;
     BGM.pause();
+
   }
 
   textSize(50);
   text("SCORE: " + score, width/2, 100);
+  
+  if (leftkey == true) {
+    pressMATCH = true;
+  } else if (rightkey == true) {
+    pressDONTMATCH = true;
+  }
 }
 
 void bClicks() {
-  if (dist(mouseX, mouseY, 125, 400) < 37.5 || leftkey == true) {
+  if (dist(mouseX, mouseY, 125, 400) < 37.5) {
+    
     pressMATCH = true;
-  } else if (dist(mouseX, mouseY, 375, 400) < 37.5 || rightkey == true) {
+  } else if (dist(mouseX, mouseY, 375, 400) < 37.5) {
     pressDONTMATCH = true;
   }
 }

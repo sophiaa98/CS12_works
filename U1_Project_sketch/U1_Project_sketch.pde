@@ -53,7 +53,7 @@ void setup() {
   minim = new Minim(this);
   BGM = minim.loadFile("BGM.mp3");
   EBGM = minim.loadFile("video-game-over.mp3");
-  TRUE = minim.loadFile("FAILURE.wav");
+  TRUE = minim.loadFile("mixkit-retro-game-notification-212.wav");
   FALSE = minim.loadFile("SUCCESS.wav");
   //scoreA = minim.loadFile("");
 

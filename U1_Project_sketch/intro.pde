@@ -1,5 +1,7 @@
 void a() {
+  EBGM.rewind();
   EBGM.pause();
+  BGM.rewind();
   BGM.play();
   pressMATCH = false;
   pressDONTMATCH = false;
