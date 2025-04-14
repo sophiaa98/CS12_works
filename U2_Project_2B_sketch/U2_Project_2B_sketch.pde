@@ -1,9 +1,9 @@
 //Sophia Song
-//Apl 4 2025
-import jave.util.ArrayList;
+//Apil 4 2025
+import java.util.ArrayList;
 
 //keyboard
-boolean upkey, downkey, leftkey, rightkey;
+boolean upkey, downkey, leftkey, rightkey, spacekey;
 
 //Game Objects
 Spaceship player1;

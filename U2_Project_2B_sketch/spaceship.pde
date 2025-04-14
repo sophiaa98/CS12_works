@@ -1,7 +1,6 @@
-class Spaceship {
+class Spaceship extends GameObject{
+  
   //instance variables 
-  PVector loc;  //location
-  PVector vel;  //velocity 
   PVector dir;  //direction
   
   //constructor
@@ -51,13 +50,13 @@ class Spaceship {
     if (rightkey) dir.rotate(radians(3));
     //around
     if (loc.x < 0) loc.x = width;
-    if (loc.x >width) loc.x = 0;
-    if (loc.y < 0) loc.x = height;
-    if (loc.y < height) loc.x = 0;
+    if (loc.x > width) loc.x = 0;
+    if (loc.y < 0) loc.y = height;
+    if (loc.y > height) loc.y = 0;
   }
   
   void shoot() {
-    //if (spacekey) bullets.add(new Bullet());
+    if (spacekey) bullets.add(new Bullet());
   }
   
   void checkForCollisions() {

@@ -1,6 +1,4 @@
-class Bullet {
-  PVector loc;
-  PVector vel;
+class Bullet extends GameObject{
   
   Bullet() {
     loc = new PVector(player1.loc.x, player1.loc.y);

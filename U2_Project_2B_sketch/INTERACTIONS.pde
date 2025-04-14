@@ -10,7 +10,7 @@ void keyPressed() {
   if (keyCode == DOWN) downkey = true;
   if (keyCode == LEFT) leftkey = true;
   if (keyCode == RIGHT) rightkey = true;
-  //if (key == ' ') spacekey = true;
+  if (key == ' ') spacekey = true;
 }
 
 void keyReleased() {
@@ -18,5 +18,5 @@ void keyReleased() {
   if (keyCode == DOWN) downkey = false;
   if (keyCode == LEFT) leftkey = false;
   if (keyCode == RIGHT) rightkey = false;
-  //if (key == ' ') spacekey = false;
+  if (key == ' ') spacekey = false;
 }
