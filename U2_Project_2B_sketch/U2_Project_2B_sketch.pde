@@ -9,7 +9,7 @@ boolean upkey, downkey, leftkey, rightkey, spacekey;
 Spaceship player1;
 
 //List of Bullets
-ArrayList<Bullet> bullets;
+ArrayList<GameObject> objects;
 
 
 //Mode
@@ -32,9 +32,9 @@ void setup () {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   img1 = loadImage("unnamed.jpg");
-  bullets = new ArrayList();
-  
+  objects = new ArrayList();
   player1 = new Spaceship();
+  objects.add(player1);
   
   /*loc = new PVector(width/2, height/2);
   //x = width/2;
@@ -49,6 +49,7 @@ void setup () {
   gravity = new PVector(0, 1);
 }
 void draw() {
+  println (objects.size());
   if (mode == INTRO) { 
     intro();
   } else if (mode == GAME) {

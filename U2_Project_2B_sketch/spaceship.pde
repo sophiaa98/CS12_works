@@ -5,8 +5,7 @@ class Spaceship extends GameObject{
   
   //constructor
   Spaceship() {
-    loc = new PVector(width/2, height/2);
-    vel = new PVector(0, 0);
+    super(width/2, height/2, 0, 0);
     dir = new PVector(0.1, 0);
   }
   
@@ -56,7 +55,7 @@ class Spaceship extends GameObject{
   }
   
   void shoot() {
-    if (spacekey) bullets.add(new Bullet());
+    if (spacekey) objects.add(new Bullet());
   }
   
   void checkForCollisions() {

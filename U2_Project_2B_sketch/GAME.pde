@@ -1,14 +1,17 @@
 void game() {
-  background(255);
-  player1.show();
-  player1.act();
+  background(0  );
   
   int i = 0;
-  while (i < bullets.size()) {
-    Bullet currentBullet = bullets.get(i);
-    currentBullet.act();
-    currentBullet.show();
-    i++;
+  while (i < objects.size()) {
+    GameObject currentObjects = objects.get(i);
+    currentObjects.act();
+    currentObjects.show();
+    if (currentObjects.lives == 0) {
+      objects.remove(i);
+    }
+    else {
+      i++;
+    }
   }
 }
 
