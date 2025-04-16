@@ -17,6 +17,7 @@ class Bullet extends GameObject{
   
   void act() {
     loc.add(vel);
+    wrapAround();
     timer--;
     if (timer == 0) lives = 0;
   }
