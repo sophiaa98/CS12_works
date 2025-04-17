@@ -35,18 +35,10 @@ void setup () {
   objects = new ArrayList();
   player1 = new Spaceship();
   objects.add(player1);
-  
-  /*loc = new PVector(width/2, height/2);
-  //x = width/2;
-  //y = height/2;
-  d = 100;*/
-  
-  /*vel = new PVector(4, 0);
-  vel.rotate(random(0, 2*PI));*/
-  //vx = random(-5, 5);
-  //vy = random(-5, 5);
-  
-  gravity = new PVector(0, 1);
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
+  objects.add(new Asteroid());
 }
 void draw() {
   println (objects.size());
@@ -72,7 +64,7 @@ void button(int x, int y, color c, color cs, color cb, String w) {
   }
   else {
     fill(c);
-    stroke(c);
+    stroke(cs);
     rect(x, y, 200, 100);
     fill(cs);
     textSize(70);
