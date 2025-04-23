@@ -17,6 +17,7 @@ class Asteroid extends GameObject {
     stroke(255);
     circle(loc.x, loc.y, d);
     line(loc.x, loc.y, loc.x+lives*50/2, loc.y);
+    //image(img2, loc.x, loc.y, 100, 100);
   }
   
   void act() {

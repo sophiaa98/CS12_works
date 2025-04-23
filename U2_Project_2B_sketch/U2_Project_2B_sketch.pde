@@ -2,7 +2,7 @@
 //Apil 4 2025
 import java.util.ArrayList;
 
-//keyboard
+//keyboard 
 boolean upkey, downkey, leftkey, rightkey, spacekey;
 
 //Game Objects
@@ -24,7 +24,7 @@ PVector vel;
 PVector gravity;
 
 float d;
-PImage img1;
+PImage img1, img2;
 
 void setup () {
   size(800, 800);
@@ -32,6 +32,7 @@ void setup () {
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   img1 = loadImage("unnamed.jpg");
+  img2 = loadImage("pngtree-game-over-glitch-effect-vector-png-image_2941563.jpg");
   objects = new ArrayList();
   player1 = new Spaceship();
   objects.add(player1);
@@ -56,7 +57,7 @@ void draw() {
 void button(int x, int y, color c, color cs, color cb, String w) {
   if(mouseX > x-100 && mouseX < x+100 && mouseY > y-50 && mouseY < y+50) {
     fill(cb);
-    stroke(cs);
+    stroke(c);
     rect(x, y, 200, 100);
     fill(c);
     textSize(60);

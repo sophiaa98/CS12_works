@@ -4,9 +4,9 @@ class Bullet extends GameObject{
   
   Bullet() {
     super (player1.loc.copy(), player1.dir.copy());
-    vel = new PVector(mouseX-loc.x, mouseY - loc.y);
+    //vel = new PVector(mouseX-loc.x, mouseY - loc.y);
     vel.setMag(10);
-    vel.add(player1.vel);
+    //vel.add(player1.vel);
     timer = 60;
     d = 5;
   }
