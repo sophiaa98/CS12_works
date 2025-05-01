@@ -1,45 +1,76 @@
 class Asteroid extends GameObject {
-  
+
   float rotSpeed, angle;
-  
-  Asteroid() {
-    super(random(0, width), random(height), 1, 1);
+  int size; // 3 = big, 2 = medium, 1 = small
+  PVector[] shape; // for jagged appearance
+
+  Asteroid(float x, float y, int size) {
+    super(x, y, 1, 1);
+    this.size = size;
+    lives = size;
+    d = size * 20;
     vel.setMag(random(1, 3));
     vel.rotate(random(TWO_PI));
-    lives = 3;
-    d = lives*20;
-    rotSpeed = random(-2, 2);
-    angle = 0;
+    rotSpeed = random(-0.05, 0.05);
+    angle = random(TWO_PI);
+    generateShape();
   }
-  
+
+  // Constructor for random spawning
+  Asteroid() {
+    this(random(width), random(height), 3);
+  }
+
+  void generateShape() {
+    int points = int(random(7, 13));
+    shape = new PVector[points];
+    for (int i = 0; i < points; i++) {
+      float theta = map(i, 0, points, 0, TWO_PI);
+      float r = d / 2 * random(0.7, 1.2);
+      shape[i] = new PVector(r * cos(theta), r * sin(theta));
+    }
+  }
+
   void show() {
-    fill(0);
+    pushMatrix();
+    translate(loc.x, loc.y);
+    rotate(angle);
+    noFill();
     stroke(255);
-    circle(loc.x, loc.y, d);
-    line(loc.x, loc.y, loc.x+lives*50/2, loc.y);
-    //image(img2, loc.x, loc.y, 100, 100);
+    beginShape();
+    for (PVector pt : shape) {
+      vertex(pt.x, pt.y);
+    }
+    endShape(CLOSE);
+    popMatrix();
   }
-  
+
   void act() {
     loc.add(vel);
+    angle += rotSpeed;
     wrapAround();
     checkForCollisions();
   }
-  
-  void checkForCollisions(){
-    int i = 0;
-    while (i < objects.size()) {
+
+  void checkForCollisions() {
+    for (int i = objects.size() - 1; i >= 0; i--) {
       GameObject obj = objects.get(i);
       if (obj instanceof Bullet) {
-        if (dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2){
-          //objects.add(new Asteroid(loc.x, loc.y, lives-1));
-          objects.add(new Asteroid());
+        if (dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2) {
+          split();
           lives = 0;
           obj.lives = 0;
         }
       }
-      i++;
     }
   }
-  
+
+  void split() {
+    if (size > 1) {
+      for (int i = 0; i < 2; i++) {
+        Asteroid child = new Asteroid(loc.x, loc.y, size - 1);
+        objects.add(child);
+      }
+    }
+  }
 }

@@ -3,12 +3,14 @@ class Spaceship extends GameObject{
   //instance variables 
   PVector dir;  //direction
   int cooldown;
+  int life;
   
   //constructor
   Spaceship() {
     super(width/2, height/2, 0, 0);
     dir = new PVector(0.1, 0);
     cooldown = 0;
+    life = 3;
   }
   
   //behaviour functions
