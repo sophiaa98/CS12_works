@@ -26,13 +26,17 @@ PVector gravity;
 float d;
 PImage img1, img2;
 
+
+int ufoTimer = 0;
+int ufoInterval = 1000; // Or use random(800, 1500) if you want variety
+
 void setup () {
   size(800, 800);
   mode = INTRO;
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   img1 = loadImage("unnamed.jpg");
-  img2 = loadImage("pngtree-game-over-glitch-effect-vector-png-image_2941563.jpg");
+  img2 = loadImage("image.png");
   objects = new ArrayList();
   player1 = new Spaceship();
   objects.add(player1);
@@ -42,7 +46,6 @@ void setup () {
   objects.add(new Asteroid());
 }
 void draw() {
-  println (objects.size());
   if (mode == INTRO) { 
     intro();
   } else if (mode == GAME) {

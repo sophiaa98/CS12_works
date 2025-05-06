@@ -8,7 +8,7 @@ class Asteroid extends GameObject {
     super(x, y, 1, 1);
     this.size = size;
     lives = size;
-    d = size * 20;
+    d = size * 40;
     vel.setMag(random(1, 3));
     vel.rotate(random(TWO_PI));
     rotSpeed = random(-0.05, 0.05);
