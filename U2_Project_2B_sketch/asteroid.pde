@@ -3,6 +3,7 @@ class Asteroid extends GameObject {
   float rotSpeed, angle;
   int size; // 3 = big, 2 = medium, 1 = small
   PVector[] shape; // for jagged appearance
+  int score; 
 
   Asteroid(float x, float y, int size) {
     super(x, y, 1, 1);
@@ -11,7 +12,7 @@ class Asteroid extends GameObject {
     d = size * 40;
     vel.setMag(random(1, 3));
     vel.rotate(random(TWO_PI));
-    rotSpeed = random(-0.05, 0.05);
+    rotSpeed = random(-0.05, 0.05); 
     angle = random(TWO_PI);
     generateShape();
   }
@@ -51,17 +52,31 @@ class Asteroid extends GameObject {
     wrapAround();
     checkForCollisions();
   }
-
+  
   void checkForCollisions() {
     for (int i = objects.size() - 1; i >= 0; i--) {
       GameObject obj = objects.get(i);
       if (obj instanceof Bullet) {
-        if (dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2) {
+        Bullet b = (Bullet)obj;
+        if (b.fromPlayer && dist(loc.x, loc.y, b.loc.x, b.loc.y) < d/2 + b.d/2) {
+          createExplosionParticles(); 
+          score++;
+          print(score);
           split();
           lives = 0;
-          obj.lives = 0;
+          b.lives = 0;
+          break;
         }
       }
+    }
+  }
+  
+  void createExplosionParticles() {
+    for (int i = 0; i < 15; i++) {
+      PVector vel = PVector.fromAngle(random(TWO_PI));
+      vel.mult(random(1, 4));
+      color c = color(255, random(100, 200), 0); // Yellow/orange colors
+      objects.add(new Particle(loc.copy(), vel, c, true));
     }
   }
 

@@ -18,11 +18,6 @@ class Spaceship extends GameObject{
   
   //behaviour functions
   void show() {
-    //pushMatrix();
-    //translate(loc.x, loc.y);
-    //rotate(dir.heading());
-    //drawShip();
-    //popMatrix();
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(dir.heading());
@@ -30,6 +25,10 @@ class Spaceship extends GameObject{
       drawShip();
     }
     popMatrix();
+    
+    if (upkey && frameCount % 3 == 0) {
+      createThrusterParticles();
+    }
   }
   
   void drawShip() {
@@ -69,38 +68,65 @@ class Spaceship extends GameObject{
     }
     vel.limit(10);
   }
-  
+
   void shoot() {
-    cooldown--;
-    if (spacekey && cooldown <= 0) {
-      objects.add(new Bullet());
-      cooldown = 30;
-    }
-  }
-  
-  void checkForCollisions() {
-  if (lifeTimer > 0) {
-    lifeTimer--;
-    return;
-  }
-
-  for (int i = objects.size() - 1; i >= 0; i--) {
-    GameObject obj = objects.get(i);
-    
-    if (obj == this) continue;
-    
-    boolean hitByAsteroid = obj instanceof Asteroid && dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2;
-    boolean hitByEnemyBullet = obj instanceof Bullet && obj != this && dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2;
-
-    if (hitByAsteroid || hitByEnemyBullet) {
-      life--;
-      lifeTimer = 120;  // 2 seconds at 60fps
-      if (life <= 0) {
-        mode = GAMEOVER;
-      }
-      return;  // only handle one hit per frame
-    }
+  cooldown--;
+  if (spacekey && cooldown <= 0) {
+    Bullet b = new Bullet();
+    b.fromPlayer = true; // Explicitly mark as player bullet
+    objects.add(b);
+    cooldown = 30;
   }
 }
+  
+  void checkForCollisions() {
+    // Skip collision check if invulnerable
+    if (lifeTimer > 0) {
+      lifeTimer--;
+      return;
+    }
+
+    for (int i = objects.size() - 1; i >= 0; i--) {
+      GameObject obj = objects.get(i);
+      
+      // Skip checking against self
+      if (obj == this) continue;
+      
+      // Check for asteroid collision
+      if (obj instanceof Asteroid && dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2) {
+        handleCollision();
+        break;
+      }
+      
+      // Check for enemy bullet collision
+      if (obj instanceof Bullet) {
+        Bullet b = (Bullet)obj;
+        if (!b.fromPlayer && dist(loc.x, loc.y, b.loc.x, b.loc.y) < d/2 + b.d/2) {
+          handleCollision();
+          b.lives = 0; // Remove the bullet
+          break;
+        }
+      }
+    }
+  }
+  
+  void createThrusterParticles() {
+    PVector exhaustPos = PVector.sub(loc, PVector.mult(dir.copy().normalize(), 15));
+    PVector particleVel = PVector.mult(dir.copy().normalize(), -2);
+    particleVel.add(new PVector(random(-0.5f, 0.5f), random(-0.5f, 0.5f)));
+    
+    //color for thruster particles
+    color c = color(random(0, 100), random(150, 200), 255);
+    objects.add(new Particle(exhaustPos, particleVel, c, true));
+  }
+  
+  
+  void handleCollision() {
+    life--;
+    lifeTimer = 120; // 2 seconds of invulnerability
+    if (life <= 0) {
+      mode = GAMEOVER;
+    }
+  }
 
 }

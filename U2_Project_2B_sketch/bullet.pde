@@ -35,13 +35,13 @@ class Bullet extends GameObject {
     vel.setMag(10);
     timer = 60;
     d = 5;
-    fromPlayer = true;
+    fromPlayer = true; // Player bullets are marked true
   }
 
   Bullet(PVector loc, PVector vel, boolean fromPlayer) {
     super(loc, vel);
     this.vel.setMag(10);
-    this.fromPlayer = fromPlayer;
+    this.fromPlayer = fromPlayer; // UFO bullets are marked false
     timer = 60;
     d = 5;
   }
