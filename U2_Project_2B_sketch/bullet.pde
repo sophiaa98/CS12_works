@@ -35,7 +35,7 @@ class Bullet extends GameObject {
     vel.setMag(10);
     timer = 60;
     d = 5;
-    fromPlayer = true; // Player bullets are marked true
+    fromPlayer = true; // Player bullets are marked true ~
   }
 
   Bullet(PVector loc, PVector vel, boolean fromPlayer) {

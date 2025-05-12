@@ -1,6 +1,5 @@
 class Spaceship extends GameObject{
   
-  //instance variables 
   PVector dir;  //direction
   int cooldown;
   int life;
@@ -21,7 +20,7 @@ class Spaceship extends GameObject{
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(dir.heading());
-    if (lifeTimer % 10 < 5) {  // Flashing effect
+    if (lifeTimer % 10 < 5) {  // Flashing effect..
       drawShip();
     }
     popMatrix();
@@ -80,7 +79,6 @@ class Spaceship extends GameObject{
 }
   
   void checkForCollisions() {
-    // Skip collision check if invulnerable
     if (lifeTimer > 0) {
       lifeTimer--;
       return;
@@ -89,21 +87,21 @@ class Spaceship extends GameObject{
     for (int i = objects.size() - 1; i >= 0; i--) {
       GameObject obj = objects.get(i);
       
-      // Skip checking against self
+      // checking against self
       if (obj == this) continue;
       
-      // Check for asteroid collision
+      // asteroid collision
       if (obj instanceof Asteroid && dist(loc.x, loc.y, obj.loc.x, obj.loc.y) < d/2 + obj.d/2) {
         handleCollision();
         break;
       }
       
-      // Check for enemy bullet collision
+      // enemy bullet collision
       if (obj instanceof Bullet) {
         Bullet b = (Bullet)obj;
         if (!b.fromPlayer && dist(loc.x, loc.y, b.loc.x, b.loc.y) < d/2 + b.d/2) {
           handleCollision();
-          b.lives = 0; // Remove the bullet
+          b.lives = 0; // -_- Remove the bullet
           break;
         }
       }
@@ -115,7 +113,7 @@ class Spaceship extends GameObject{
     PVector particleVel = PVector.mult(dir.copy().normalize(), -2);
     particleVel.add(new PVector(random(-0.5f, 0.5f), random(-0.5f, 0.5f)));
     
-    //color for thruster particles
+    // thruster particles
     color c = color(random(0, 100), random(150, 200), 255);
     objects.add(new Particle(exhaustPos, particleVel, c, true));
   }
@@ -123,7 +121,7 @@ class Spaceship extends GameObject{
   
   void handleCollision() {
     life--;
-    lifeTimer = 120; // 2 seconds of invulnerability
+    lifeTimer = 120; // 2s of invulnerability
     if (life <= 0) {
       mode = GAMEOVER;
     }

@@ -28,7 +28,7 @@ PImage img1, img2;
 
 
 int ufoTimer = 0;
-int ufoInterval = 1000; // Or use random(800, 1500) if you want variety Now make a 
+int ufoInterval = 1000; 
 
 void setup () {
   size(800, 800);
