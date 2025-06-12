@@ -7,6 +7,9 @@ boolean upkey, downkey, leftkey, rightkey, spacekey;
 
 //Game Objects
 Spaceship player1;
+int score = 0;
+int Bscore = 0;
+
 
 //List of Bullets
 ArrayList<GameObject> objects;
@@ -26,9 +29,13 @@ PVector gravity;
 float d;
 PImage img1, img2;
 
-
 int ufoTimer = 0;
 int ufoInterval = 1000; 
+
+// Teleport variables
+boolean teleportKey;
+int teleportCooldown = 0;
+final int TELEPORT_COOLDOWN_MAX = 180;
 
 void setup () {
   size(800, 800);

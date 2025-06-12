@@ -2,7 +2,11 @@ void game() {
   background(0);
   fill(255);
   textSize(25);
-  text("SCORE:", 45, 20);
+  text("SCORE: " + score, 45, 20);
+  
+  if (teleportCooldown > 0) {
+    teleportCooldown--;
+  }
   
   // UFO spawn logic
   ufoTimer--;
@@ -27,6 +31,19 @@ void game() {
   
   fill(#40D7FF);
   text("Lives: " + player1.life, 700, 20);
+  
+  // Teleport cooldown display
+  float teleportReady = map(teleportCooldown, 0, TELEPORT_COOLDOWN_MAX, 1, 0);
+  if (teleportCooldown <= 0) {
+    fill(#2EC0E3); 
+  } 
+  else {
+    fill(#A454DB);
+  }
+  noStroke();
+  rect(50, 75, 100 * teleportReady, 20);
+  fill(255);
+  text("Teleport", 50, 50);
   
   //PAUSE BUTTON 
   if(mouseX >710 && mouseX < 750 && mouseY > 50 && mouseY < 100) {

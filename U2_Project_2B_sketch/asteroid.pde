@@ -3,7 +3,6 @@ class Asteroid extends GameObject {
   float rotSpeed, angle;
   int size; // 3 = big, 2 = medium, 1 = small
   PVector[] shape; // for jagged appearance
-  int score; 
 
   Asteroid(float x, float y, int size) {
     super(x, y, 1, 1);

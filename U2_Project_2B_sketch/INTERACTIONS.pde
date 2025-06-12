@@ -11,6 +11,7 @@ void keyPressed() {
   if (keyCode == LEFT) leftkey = true;
   if (keyCode == RIGHT) rightkey = true;
   if (key == ' ') spacekey = true;
+  if (key == 'z' || key == 'Z') teleportKey = true;
 }
 
 void keyReleased() {
@@ -19,4 +20,5 @@ void keyReleased() {
   if (keyCode == LEFT) leftkey = false;
   if (keyCode == RIGHT) rightkey = false;
   if (key == ' ') spacekey = false;
+  if (key == 'z' || key == 'Z') teleportKey = false;
 }

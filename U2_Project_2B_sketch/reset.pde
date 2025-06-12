@@ -7,6 +7,7 @@ void reset() {
   objects.add(new Asteroid());
   objects.add(new Asteroid());
   
-  //score = 0;
+  score = 0;
   player1.life = 3;
+  teleportCooldown = 0;
 }

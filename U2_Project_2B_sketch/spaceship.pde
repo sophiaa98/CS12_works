@@ -53,6 +53,9 @@ class Spaceship extends GameObject{
     shoot();
     checkForCollisions();
     wrapAround();
+    if (teleportKey && teleportCooldown <= 0) {
+      teleport();
+    }
   }
   
   void move() {
@@ -69,14 +72,14 @@ class Spaceship extends GameObject{
   }
 
   void shoot() {
-  cooldown--;
-  if (spacekey && cooldown <= 0) {
-    Bullet b = new Bullet();
-    b.fromPlayer = true; // Explicitly mark as player bullet
-    objects.add(b);
-    cooldown = 30;
+    cooldown--;
+    if (spacekey && cooldown <= 0) {
+      Bullet b = new Bullet();
+      b.fromPlayer = true;
+      objects.add(b);
+      cooldown = 30;
+    }
   }
-}
   
   void checkForCollisions() {
     if (lifeTimer > 0) {
@@ -121,10 +124,49 @@ class Spaceship extends GameObject{
   
   void handleCollision() {
     life--;
-    lifeTimer = 120; // 2s of invulnerability
+    lifeTimer = 120; 
     if (life <= 0) {
       mode = GAMEOVER;
     }
   }
-
+  
+  void teleport() {
+    if (teleportCooldown > 0) return;
+    
+    boolean safeSpot = false;
+    int attempts = 0;
+    PVector newLoc = new PVector();
+    
+    // Try to find a safe spot (max 100)
+    while (!safeSpot && attempts < 100) {
+      newLoc.x = random(50, width-50);
+      newLoc.y = random(50, height-50);
+      safeSpot = true;
+      
+      // Check distance to all asteroids
+      for (GameObject obj : objects) {
+        if (obj instanceof Asteroid) {
+          if (dist(newLoc.x, newLoc.y, obj.loc.x, obj.loc.y) < 200) {
+            safeSpot = false;
+            break;
+          }
+        }
+      }
+      attempts++;
+    }
+    
+    if (safeSpot) {
+      loc = newLoc.copy();
+      vel.mult(0.5); 
+      teleportCooldown = TELEPORT_COOLDOWN_MAX;
+      
+      // Create teleport effect particles
+      for (int i = 0; i < 30; i++) {
+        PVector vel = PVector.fromAngle(random(TWO_PI));
+        vel.mult(random(1, 3));
+        color c = color(random(150, 255), random(150, 255), 255);
+        objects.add(new Particle(loc.copy(), vel, c, false));
+      }
+    }
+  }
 }
